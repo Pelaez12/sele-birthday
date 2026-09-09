@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>🎉 ¡Cumple de Sele - 20 Años!</title>
+
+  <!-- Metadatos SEO y Open Graph para WhatsApp y Redes Sociales -->
+  <meta name="description" content="¡Celebremos mis 20 años en Kraken Bar! 19 de Septiembre 9PM" />
+  <meta property="og:title" content="🎉 ¡Cumple de Sele - 20 Años!" />
+  <meta property="og:description" content="¡Celebremos mis 20 años en Kraken Bar! 19 de Septiembre 9PM" />
+  <meta property="og:image" content="assets/sele-flyer.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_PE" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🎉 ¡Cumple de Sele - 20 Años!" />
+  <meta name="twitter:description" content="¡Celebremos mis 20 años en Kraken Bar! 19 de Septiembre 9PM" />
+  <meta name="twitter:image" content="assets/sele-flyer.jpg" />
+  <meta name="theme-color" content="#FA5D83" />
+
+  <!-- Favicon Disco Ball -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪩</text></svg>" />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Caveat (manuscrito coquette) y Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y PALETA DE COLORES OFICIAL (IDÉNTICA AL FLYER)
+       ========================================================================== */
+    :root {
+      --bg-warm: #FAF4ED;
+      --bg-cream: #F6EFE7;
+      --pink-coquette: #FA5D83;
+      --pink-soft: #FF9EBB;
+      --pink-pastel: #FFF0F4;
+      --pink-deep: #E03760;
+      --text-dark: #1F1B1A;
+      --text-muted: #6E6360;
+      --gold-primary: #D4A359;
+      --gold-dark: #8E6018;
+      --gold-glow: #E2B467;
+      --gold-soft: #F9E8B8;
+      --card-white: #FFFFFF;
+      --shadow-subtle: 0 4px 20px rgba(31, 27, 26, 0.06);
+      --shadow-elegant: 0 12px 35px rgba(250, 93, 131, 0.14), 0 4px 15px rgba(0, 0, 0, 0.04);
+      --shadow-floating: 0 18px 45px rgba(250, 93, 131, 0.22), 0 6px 18px rgba(0, 0, 0, 0.06);
+      --radius-card: 24px;
+      --radius-btn: 50px;
+    }
+
+    /* ==========================================================================
+       RESET Y ESTILOS BASE
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-warm);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 158, 187, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(212, 163, 89, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(250, 244, 237, 0.9) 0%, var(--bg-cream) 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ==========================================================================
+       CANVAS DE CONFETI OVERLAY
+       ========================================================================== */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ==========================================================================
+       DECORACIONES DE FONDO: DESTELLOS Y BRILLOS FLOTANTES
+       ========================================================================== */
+    .sparkle-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .sparkle-dot {
+      position: absolute;
+      color: var(--gold-primary);
+      opacity: 0.7;
+      animation: twinkle 3s ease-in-out infinite alternate;
+      user-select: none;
+    }
+
+    .sparkle-dot.pink {
+      color: var(--pink-coquette);
+      animation-duration: 4s;
+    }
+
+    .sparkle-dot.large {
+      font-size: 22px;
+    }
+
+    .sparkle-dot.medium {
+      font-size: 16px;
+    }
+
+    .sparkle-dot.small {
+      font-size: 11px;
+    }
+
+    @keyframes twinkle {
+      0% {
+        transform: scale(0.6) rotate(0deg);
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(1.2) rotate(45deg);
+        opacity: 0.3;
+      }
+    }
+
+    /* ==========================================================================
+       CONTENEDOR PRINCIPAL
+       ========================================================================== */
+    .page-wrapper {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ==========================================================================
+       BOLA DISCO 2D ANIMADA COLGADA EN LA PARTE SUPERIOR
+       ========================================================================== */
+    .disco-fixture {
+      position: relative;
+      width: 130px;
+      height: 140px;
+      margin-top: -10px;
+      margin-bottom: 8px;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      transform-origin: top center;
+      animation: swing 4.2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 10px 18px rgba(250, 93, 131, 0.25));
+    }
+
+    .disco-fixture img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    @keyframes swing {
+      0% {
+        transform: rotate(-6.5deg);
+      }
+      100% {
+        transform: rotate(6.5deg);
+      }
+    }
+
+    /* Destello especial cerca de la bola disco */
+    .disco-glow-aura {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255, 158, 187, 0.35) 0%, rgba(212, 163, 89, 0.2) 45%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(12px);
+      pointer-events: none;
+      animation: pulseGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: translateX(-50%) scale(0.85);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 0.95;
+      }
+    }
+
+    /* ==========================================================================
+       ENCABEZADO / BADGE SUPERIOR
+       ========================================================================== */
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(250, 93, 131, 0.25);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(250, 93, 131, 0.08);
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .header-title span {
+      color: var(--pink-coquette);
+      font-style: italic;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       SECCIÓN HERO: FLYER ENMARCADO CON STICKER COQUETTE
+       ========================================================================== */
+    .hero-container {
+      width: 100%;
+      position: relative;
+      margin: 16px 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flyer-card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius-card);
+      background: var(--card-white);
+      padding: 12px;
+      box-shadow: var(--shadow-floating);
+      border: 1px solid rgba(250, 93, 131, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .flyer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(250, 93, 131, 0.25);
+    }
+
+    .flyer-image-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: calc(var(--radius-card) - 6px);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #fdfaf6;
+    }
+
+    .flyer-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Sticker festivo en la esquina superior */
+    .flyer-sticker {
+      position: absolute;
+      top: -12px;
+      right: -8px;
+      background: linear-gradient(135deg, var(--pink-coquette), var(--pink-soft));
+      color: #FFFFFF;
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 18px rgba(250, 93, 131, 0.45);
+      border: 2.5px solid #FFFFFF;
+      transform: rotate(5.5deg);
+      z-index: 5;
+      animation: stickerBob 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes stickerBob {
+      0% {
+        transform: rotate(5.5deg) scale(1);
+      }
+      100% {
+        transform: rotate(3deg) scale(1.05);
+      }
+    }
+
+    /* Frase destacada oficial estilo pincel manuscrito */
+    .brush-phrase-box {
+      margin: 18px 0 6px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .brush-phrase {
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 2.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      display: inline-block;
+      position: relative;
+    }
+
+    .brush-phrase span.heart {
+      color: var(--pink-coquette);
+      display: inline-block;
+      animation: heartbeat 1.8s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.25); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.15); }
+    }
+
+    /* Badges con resumen clave */
+    .event-quick-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .quick-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-white);
+      border: 1px solid rgba(212, 163, 89, 0.35);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .quick-pill .pill-icon {
+      font-size: 1rem;
+    }
+
+    /* ==========================================================================
+       SECCIÓN CONTADOR EN TIEMPO REAL
+       ========================================================================== */
+    .countdown-section {
+      width: 100%;
+      margin: 22px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--gold-dark);
+      opacity: 0.6;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .count-card {
+      background: var(--card-white);
+      border-radius: 18px;
+      padding: 14px 6px;
+      text-align: center;
+      box-shadow: var(--shadow-elegant);
+      border: 1px solid rgba(250, 93, 131, 0.16);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .count-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-primary), var(--pink-coquette));
+    }
+
+    .count-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--pink-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .count-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    /* Mensaje si el evento ya inició */
+    .countdown-live-banner {
+      display: none;
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(135deg, var(--pink-coquette), var(--pink-deep));
+      color: #FFFFFF;
+      padding: 16px 20px;
+      border-radius: 20px;
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-floating);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    /* ==========================================================================
+       BOTÓN PRINCIPAL DE CONFIRMACIÓN (RSVP WHATSAPP)
+       ========================================================================== */
+    .rsvp-action-box {
+      width: 100%;
+      margin: 14px 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-rsvp {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(135deg, #FA5D83 0%, #E03760 100%);
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      padding: 18px 24px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(250, 93, 131, 0.42), 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: buttonPulse 2.2s infinite;
+    }
+
+    .btn-rsvp:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 32px rgba(250, 93, 131, 0.55), 0 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-rsvp:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 6px 16px rgba(250, 93, 131, 0.4);
+    }
+
+    @keyframes buttonPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(250, 93, 131, 0.55), 0 8px 20px rgba(250, 93, 131, 0.35);
+      }
+      70% {
+        box-shadow: 0 0 0 16px rgba(250, 93, 131, 0), 0 12px 28px rgba(250, 93, 131, 0.45);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(250, 93, 131, 0), 0 8px 20px rgba(250, 93, 131, 0.35);
+      }
+    }
+
+    .rsvp-microcopy {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ==========================================================================
+       SECCIÓN UBICACIÓN & GOOGLE MAPS
+       ========================================================================== */
+    .location-card {
+      width: 100%;
+      background: var(--card-white);
+      border-radius: var(--radius-card);
+      padding: 24px 18px;
+      box-shadow: var(--shadow-elegant);
+      border: 1px solid rgba(250, 93, 131, 0.14);
+      margin: 12px 0 20px;
+    }
+
+    .location-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .location-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .location-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Contenedor responsivo para el iframe de Google Maps */
+    .map-responsive-container {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: #eae6df;
+    }
+
+    .map-responsive-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border: 0;
+    }
+
+    /* Botones de acción complementarios (Maps & Calendar) */
+    .location-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+      width: 100%;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-maps {
+      background: #F8F9FA;
+      color: #1F1B1A;
+      border: 1.5px solid #E2E8F0;
+    }
+
+    .btn-maps:hover {
+      background: #EDF2F7;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+
+    .btn-calendar {
+      background: rgba(212, 163, 89, 0.12);
+      color: #926A28;
+      border: 1.5px solid rgba(212, 163, 89, 0.35);
+    }
+
+    .btn-calendar:hover {
+      background: rgba(212, 163, 89, 0.22);
+      border-color: var(--gold-primary);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       TARJETA DE DETALLES DEL EVENTO (DRESS CODE & VIBES)
+       ========================================================================== */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .detail-box {
+      background: var(--card-white);
+      border-radius: 18px;
+      padding: 16px 14px;
+      border: 1px solid rgba(250, 93, 131, 0.12);
+      box-shadow: var(--shadow-subtle);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detail-box .icon {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .detail-box .title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--gold-dark);
+      margin-bottom: 4px;
+    }
+
+    .detail-box .desc {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+
+    /* ==========================================================================
+       PIE DE PÁGINA
+       ========================================================================== */
+    .page-footer {
+      text-align: center;
+      padding-top: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .page-footer strong {
+      color: var(--pink-deep);
+    }
+
+    /* ==========================================================================
+       MEDIA QUERIES PARA RESPONSIVIDAD EXACTA
+       ========================================================================== */
+    @media (max-width: 380px) {
+      .header-title {
+        font-size: 1.85rem;
+      }
+      .brush-phrase {
+        font-size: 1.8rem;
+      }
+      .count-number {
+        font-size: 1.65rem;
+      }
+      .count-label {
+        font-size: 0.58rem;
+      }
+      .map-responsive-container {
+        height: 260px;
+      }
+      .btn-rsvp {
+        font-size: 1rem;
+        padding: 16px 18px;
+      }
+    }
+
+    @media (min-width: 600px) {
+      .map-responsive-container {
+        height: 360px;
+      }
+      .disco-fixture {
+        width: 150px;
+        height: 160px;
+      }
+    }
+
+    /* Soporte para accesibilidad vestibular (prefers-reduced-motion) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas independiente para la lluvia de confeti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Destellos y estrellas flotantes de fondo -->
+  <div class="sparkle-bg" aria-hidden="true">
+    <span class="sparkle-dot large" style="top: 8%; left: 12%;">✦</span>
+    <span class="sparkle-dot pink medium" style="top: 14%; right: 15%;">✨</span>
+    <span class="sparkle-dot small" style="top: 28%; left: 8%;">✧</span>
+    <span class="sparkle-dot pink large" style="top: 35%; right: 10%;">✦</span>
+    <span class="sparkle-dot medium" style="top: 52%; left: 15%;">✨</span>
+    <span class="sparkle-dot pink small" style="top: 65%; right: 14%;">✧</span>
+    <span class="sparkle-dot large" style="top: 78%; left: 9%;">✦</span>
+    <span class="sparkle-dot pink medium" style="top: 88%; right: 18%;">✨</span>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- Bola disco 2D animada colgada de cordón superior -->
+    <div class="disco-fixture" title="¡Noche de fiesta y brillo!">
+      <div class="disco-glow-aura"></div>
+      <img src="assets/disco-ball.svg" alt="Bola de discoteca brillante" />
+    </div>
+
+    <!-- Header / Título Coquette -->
+    <header style="text-align: center; width: 100%;">
+      <div class="header-badge">
+        <span>🪩 Fiesta de Cumpleaños</span>
+      </div>
+      <h1 class="header-title">
+        ¡Cumple de <span>Sele</span>!
+      </h1>
+    </header>
+
+    <!-- Sección Hero con Flyer Enmarcado y Sticker -->
+    <section class="hero-container" aria-label="Flyer oficial">
+      <div class="flyer-card">
+        <div class="flyer-sticker">
+          ¡Cumplo 20 Años! 💖
+        </div>
+        <div class="flyer-image-wrapper">
+          <img src="assets/sele-flyer.jpg" alt="Flyer oficial del cumpleaños de Sele - 20 Años" loading="eager" />
+        </div>
+      </div>
+
+      <!-- Frase destacada oficial estilo pincel -->
+      <div class="brush-phrase-box">
+        <p class="brush-phrase">
+          “¡Trae buena onda Y ganas de tomar! <span class="heart">♡</span>”
+        </p>
+      </div>
+
+      <!-- Datos clave rápidos -->
+      <div class="event-quick-info">
+        <div class="quick-pill">
+          <span class="pill-icon">🗓️</span>
+          <span>19 de Septiembre</span>
+        </div>
+        <div class="quick-pill">
+          <span class="pill-icon">⏰</span>
+          <span>9:00 PM</span>
+        </div>
+        <div class="quick-pill">
+          <span class="pill-icon">📍</span>
+          <span>Kraken Bar Lima</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contador en Tiempo Real -->
+    <section class="countdown-section" aria-label="Cuenta regresiva del evento">
+      <div class="section-label">
+        <span>Faltan muy pocos días</span>
+      </div>
+
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="count-card">
+          <span class="count-number" id="days">00</span>
+          <span class="count-label">Días</span>
+        </div>
+        <div class="count-card">
+          <span class="count-number" id="hours">00</span>
+          <span class="count-label">Horas</span>
+        </div>
+        <div class="count-card">
+          <span class="count-number" id="minutes">00</span>
+          <span class="count-label">Minutos</span>
+        </div>
+        <div class="count-card">
+          <span class="count-number" id="seconds">00</span>
+          <span class="count-label">Segundos</span>
+        </div>
+      </div>
+
+      <div class="countdown-live-banner" id="countdownCelebration">
+        ¡La fiesta ya empezó! 🎉🪩
+      </div>
+    </section>
+
+    <!-- Botón Principal de Confirmación (RSVP) -->
+    <section class="rsvp-action-box" aria-label="Confirmación de asistencia">
+      <button type="button" class="btn-rsvp" id="btnRsvp" aria-label="Confirmar asistencia por WhatsApp">
+        <span>CONFIRMAR ASISTENCIA</span>
+        <span>✅</span>
+      </button>
+      <p class="rsvp-microcopy">
+        <span>✨</span> Confirma tu asistencia directamente al WhatsApp de Sele
+      </p>
+    </section>
+
+    <!-- Tarjetas de Detalles Adicionales -->
+    <div class="details-grid">
+      <div class="detail-box">
+        <span class="icon">👗✨</span>
+        <span class="title">Dress Code</span>
+        <span class="desc">Chic / Coquette / Night Out</span>
+      </div>
+      <div class="detail-box">
+        <span class="icon">🍸🪩</span>
+        <span class="title">Actitud</span>
+        <span class="desc">Ganas de bailar, reír y brindar</span>
+      </div>
+    </div>
+
+    <!-- Sección Ubicación & Google Maps -->
+    <section class="location-card" aria-label="Ubicación y mapa de Kraken Bar Lima">
+      <div class="location-header">
+        <h2 class="location-title">📍 Lugar: Kraken Bar Lima</h2>
+        <p class="location-subtitle">El mejor spot para celebrar los 20 de Sele</p>
+      </div>
+
+      <!-- Contenedor Responsive de Google Maps con el iframe suministrado -->
+      <div class="map-responsive-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.740219505921!2d-77.06177992400096!3d-12.0613866881766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c979204be905%3A0x1f4945a1b3f4c333!2sKraken%20Bar%20Lima!5e0!3m2!1ses-419!2spe!4v1788839978057!5m2!1ses-419!2spe" 
+          width="600" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="Mapa de ubicación Kraken Bar Lima">
+        </iframe>
+      </div>
+
+      <!-- Botones de Acción Directa -->
+      <div class="location-actions">
+        <a 
+          href="https://maps.google.com/?q=Kraken+Bar+Lima" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-secondary btn-maps">
+          <span>🗺️</span>
+          <span>Abrir en la app de Google Maps</span>
+        </a>
+
+        <a 
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%F0%9F%8E%89+Cumple+de+Sele+-+20+A%C3%B1os%21+%F0%9F%AA%A9&dates=20260920T020000Z%2F20260920T080000Z&details=%C2%A1Celebremos+mis+20+a%C3%B1os+en+Kraken+Bar%21+%C2%A1Trae+buena+onda+Y+ganas+de+tomar%21+%E2%99%A1&location=Kraken+Bar+Lima" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-secondary btn-calendar">
+          <span>📅</span>
+          <span>Guardar fecha en Google Calendar</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>Hecho con amor para el cumple de <strong>Sele</strong> 💖🪩</p>
+      <p style="margin-top: 4px; font-size: 0.78rem; opacity: 0.75;">¡Te esperamos para pasar una noche inolvidable!</p>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT NATIVO Y AUTOCONTENIDO (CUENTA REGRESIVA & CONFETI CANVAS)
+       ========================================================================== */ -->
+  <script>
+    (function () {
+      "use strict";
+
+      /* --------------------------------------------------------------------------
+         1. RELOJ DE CUENTA REGRESIVA EXACTO A LIMA (GMT-5)
+         Target: 19 de Septiembre a las 21:00 (GMT-5 / Hora de Lima, Perú)
+         -------------------------------------------------------------------------- */
+      const targetDate = new Date("2026-09-19T21:00:00-05:00").getTime();
+
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+      const gridEl = document.getElementById("countdownGrid");
+      const liveBannerEl = document.getElementById("countdownCelebration");
+
+      let timerInterval = null;
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          if (gridEl) gridEl.style.display = "none";
+          if (liveBannerEl) liveBannerEl.style.display = "block";
+          if (timerInterval) clearInterval(timerInterval);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, "0");
+        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, "0");
+      }
+
+      updateCountdown();
+      timerInterval = setInterval(updateCountdown, 1000);
+
+      /* --------------------------------------------------------------------------
+         2. MOTOR DE CONFETI EN CANVAS NATIVO Y AUTOCONTENIDO (~60 LÍNEAS)
+         Sin CDNs externos, 100% compatible con WebViews de WhatsApp y Móviles
+         -------------------------------------------------------------------------- */
+      const canvas = document.getElementById("confettiCanvas");
+      const ctx = canvas.getContext("2d");
+      let confettiPieces = [];
+      let animationId = null;
+
+      const confettiColors = [
+        "#FA5D83", // Rosa coquette
+        "#FF9EBB", // Rosa pastel
+        "#D4A359", // Dorado
+        "#E2B467", // Oro brillo
+        "#FFFFFF", // Blanco destello
+        "#E03760", // Fucsia profundo
+        "#F9E8B8"  // Crema dorada
+      ];
+
+      function resizeCanvas() {
+        if (!canvas) return;
+        if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      function createConfettiPiece(x, y) {
+        return {
+          x: x || Math.random() * canvas.width,
+          y: y || Math.random() * (canvas.height * 0.4),
+          w: Math.random() * 9 + 6,
+          h: Math.random() * 5 + 4,
+          color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+          vx: (Math.random() - 0.5) * 8,
+          vy: Math.random() * -7 - 3,
+          gravity: 0.22,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1,
+          decay: Math.random() * 0.007 + 0.005,
+          shape: Math.random() > 0.4 ? "rect" : "circle"
+        };
+      }
+
+      function launchConfetti(count = 130) {
+        resizeCanvas();
+        for (let i = 0; i < count; i++) {
+          const startX = canvas.width * 0.5 + (Math.random() - 0.5) * (canvas.width * 0.6);
+          const startY = canvas.height * 0.65;
+          confettiPieces.push(createConfettiPiece(startX, startY));
+        }
+
+        if (!animationId) {
+          runConfettiAnimation();
+        }
+      }
+
+      function runConfettiAnimation() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = confettiPieces.length - 1; i >= 0; i--) {
+          const p = confettiPieces[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.vx *= 0.98;
+          p.rotation += p.rotationSpeed;
+          p.opacity -= p.decay;
+
+          if (p.opacity <= 0 || p.y > canvas.height + 20) {
+            confettiPieces.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === "rect") {
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.w / 2.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          ctx.restore();
+        }
+
+        if (confettiPieces.length > 0) {
+          animationId = requestAnimationFrame(runConfettiAnimation);
+        } else {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      /* --------------------------------------------------------------------------
+         3. MANEJADOR DEL BOTÓN RSVP CON CONFETI Y REDIRECCIÓN A WHATSAPP
+         -------------------------------------------------------------------------- */
+      const btnRsvp = document.getElementById("btnRsvp");
+      const whatsappUrl = "https://wa.me/51912652283?text=CONFIRMO%20MI%20ASISTENCIA%20%E2%9C%85%20";
+
+      if (btnRsvp) {
+        btnRsvp.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // 1. Lanzar lluvia festiva de confeti
+          launchConfetti(150);
+
+          // 2. Feedback háptico en móviles si está disponible
+          if (navigator.vibrate) {
+            try {
+              navigator.vibrate([35, 30, 45]);
+            } catch (err) {}
+          }
+
+          // 3. Abrir WhatsApp con blindaje contra bloqueadores de popups y WebViews
+          setTimeout(function () {
+            let opened = null;
+            try {
+              opened = window.open(whatsappUrl, "_blank");
+            } catch (err) {
+              opened = null;
+            }
+            if (!opened || opened.closed || typeof opened.closed === "undefined") {
+              window.location.href = whatsappUrl;
+            }
+          }, 400);
+        });
+      }
+
+      // Pequeña lluvia de confeti de bienvenida al cargar la página tras 600ms (si el usuario no tiene reducción de movimiento)
+      window.addEventListener("load", function () {
+        const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!prefersReducedMotion) {
+          setTimeout(function () {
+            launchConfetti(45);
+          }, 600);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
