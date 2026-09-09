@@ -21,6 +21,7 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const HTML_FILE = path.join(ROOT_DIR, 'index.html');
 const FLYER_FILE = path.join(ROOT_DIR, 'assets', 'sele-flyer.jpg');
 const DISCO_BALL_FILE = path.join(ROOT_DIR, 'assets', 'disco-ball.svg');
+const YAPE_FILE = path.join(ROOT_DIR, 'assets', 'yape-icon.png');
 
 const EXPECTED_MAPS_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.740219505921!2d-77.06177992400096!3d-12.0613866881766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c979204be905%3A0x1f4945a1b3f4c333!2sKraken%20Bar%20Lima!5e0!3m2!1ses-419!2spe!4v1788839978057!5m2!1ses-419!2spe";
 const EXPECTED_PHONE = "51912652283";
@@ -100,6 +101,22 @@ runTest("3.1 Referencia correcta de activos dentro del index.html", () => {
     htmlContent.includes("assets/disco-ball.svg"),
     "No se encontró la referencia a 'assets/disco-ball.svg' en el HTML"
   );
+  assert(
+    htmlContent.includes("assets/yape-icon.png"),
+    "No se encontró la referencia a 'assets/yape-icon.png' en el HTML"
+  );
+});
+
+// 3.2 Existencia e integridad de assets/yape-icon.png (> 10KB)
+runTest("3.2 Existencia e integridad de assets/yape-icon.png (> 10KB)", () => {
+  assert(fs.existsSync(YAPE_FILE), `Archivo no encontrado: ${YAPE_FILE}`);
+  const stats = fs.statSync(YAPE_FILE);
+  const minBytes = 10 * 1024;
+  assert(
+    stats.size > minBytes,
+    `yape-icon.png es demasiado pequeño (${(stats.size / 1024).toFixed(2)} KB), se esperaba > 10 KB`
+  );
+  console.log(`    (Tamaño actual: ${(stats.size / 1024).toFixed(2)} KB)`);
 });
 
 // 4. El HTML contiene exactamente el iframe de Google Maps para Kraken Bar Lima

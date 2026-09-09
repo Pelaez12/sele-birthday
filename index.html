@@ -692,6 +692,20 @@
     .detail-box .icon {
       font-size: 1.6rem;
       margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .yape-icon-img {
+      width: 27px;
+      height: 27px;
+      border-radius: 7px;
+      object-fit: cover;
+      vertical-align: middle;
+      box-shadow: 0 2px 8px rgba(116, 38, 142, 0.28);
+      display: inline-block;
     }
 
     .detail-box .title {
@@ -902,7 +916,10 @@
     <!-- Tarjetas de Detalles Adicionales -->
     <div class="details-grid">
       <div class="detail-box detail-box-gift">
-        <span class="icon">🎁❗</span>
+        <span class="icon">
+          <span>🎁</span>
+          <img src="assets/yape-icon.png" alt="Yape" class="yape-icon-img" />
+        </span>
         <span class="title gift-title">Regalo</span>
         <span class="desc gift-desc">TRAER REGALO <span class="gift-mandatory">*OBLIGATORIO*</span></span>
       </div>
