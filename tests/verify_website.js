@@ -161,8 +161,8 @@ runTest("5. Botón 'CONFIRMAR ASISTENCIA' y URL de WhatsApp con número y texto 
   );
 });
 
-// 5.1 Eliminación de Dress Code y presencia de 'TRAER REGALO *OBLIGATORIO*' con color de Actitud (var(--gold-dark))
-runTest("5.1 Dress Code eliminado y 'TRAER REGALO *OBLIGATORIO*' con color var(--gold-dark) presente", () => {
+// 5.1 Eliminación de Dress Code, TRAER REGALO con color Actitud y *OBLIGATORIO* en rojo
+runTest("5.1 Dress Code eliminado, 'TRAER REGALO' en dorado y '*OBLIGATORIO*' en rojo presente", () => {
   assert(
     !htmlContent.includes("Dress Code"),
     "Se encontró todavía la etiqueta 'Dress Code' en el HTML"
@@ -178,6 +178,10 @@ runTest("5.1 Dress Code eliminado y 'TRAER REGALO *OBLIGATORIO*' con color var(-
   assert(
     htmlContent.includes("color: var(--gold-dark) !important;"),
     "No se encontró color: var(--gold-dark) aplicado a gift-desc"
+  );
+  assert(
+    htmlContent.includes("color: #DC2626 !important;"),
+    "No se encontró color: #DC2626 aplicado a gift-mandatory"
   );
 });
 
