@@ -22,6 +22,7 @@ const HTML_FILE = path.join(ROOT_DIR, 'index.html');
 const FLYER_FILE = path.join(ROOT_DIR, 'assets', 'sele-flyer.jpg');
 const DISCO_BALL_FILE = path.join(ROOT_DIR, 'assets', 'disco-ball.svg');
 const YAPE_FILE = path.join(ROOT_DIR, 'assets', 'yape-icon.png');
+const AUDIO_FILE = path.join(ROOT_DIR, 'assets', 'birthday-song.mp3');
 
 const EXPECTED_MAPS_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.740219505921!2d-77.06177992400096!3d-12.0613866881766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c979204be905%3A0x1f4945a1b3f4c333!2sKraken%20Bar%20Lima!5e0!3m2!1ses-419!2spe!4v1788839978057!5m2!1ses-419!2spe";
 const EXPECTED_PHONE = "51912652283";
@@ -105,6 +106,10 @@ runTest("3.1 Referencia correcta de activos dentro del index.html", () => {
     htmlContent.includes("assets/yape-icon.png"),
     "No se encontró la referencia a 'assets/yape-icon.png' en el HTML"
   );
+  assert(
+    htmlContent.includes("assets/birthday-song.mp3"),
+    "No se encontró la referencia a 'assets/birthday-song.mp3' en el HTML"
+  );
 });
 
 // 3.2 Existencia e integridad de assets/yape-icon.png (> 10KB)
@@ -117,6 +122,27 @@ runTest("3.2 Existencia e integridad de assets/yape-icon.png (> 10KB)", () => {
     `yape-icon.png es demasiado pequeño (${(stats.size / 1024).toFixed(2)} KB), se esperaba > 10 KB`
   );
   console.log(`    (Tamaño actual: ${(stats.size / 1024).toFixed(2)} KB)`);
+});
+
+// 3.3 Existencia e integridad de assets/birthday-song.mp3 (> 1MB) y reproductor
+runTest("3.3 Existencia e integridad de assets/birthday-song.mp3 (> 1MB) y reproductor", () => {
+  assert(fs.existsSync(AUDIO_FILE), `Archivo de audio no encontrado: ${AUDIO_FILE}`);
+  const stats = fs.statSync(AUDIO_FILE);
+  const minBytes = 1024 * 1024; // 1 MB
+  assert(
+    stats.size > minBytes,
+    `birthday-song.mp3 es demasiado pequeño (${(stats.size / (1024 * 1024)).toFixed(2)} MB), se esperaba > 1 MB`
+  );
+  console.log(`    (Tamaño actual: ${(stats.size / (1024 * 1024)).toFixed(2)} MB)`);
+
+  assert(
+    htmlContent.includes('id="birthdayAudio"'),
+    "No se encontró el elemento <audio id='birthdayAudio'> en el HTML"
+  );
+  assert(
+    htmlContent.includes('id="musicToggle"'),
+    "No se encontró el botón de música #musicToggle en el HTML"
+  );
 });
 
 // 4. El HTML contiene exactamente el iframe de Google Maps para Kraken Bar Lima
@@ -161,8 +187,8 @@ runTest("5. Botón 'CONFIRMAR ASISTENCIA' y URL de WhatsApp con número y texto 
   );
 });
 
-// 5.1 Eliminación de Dress Code, TRAER REGALO y ACTITUD simétricos en dorado y *OBLIGATORIO* en rojo
-runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '*OBLIGATORIO*' en rojo presente", () => {
+// 5.1 Eliminación de Dress Code, TRAER REGALO y ACTITUD simétricos con '¡No olvides tu regalito! 💗'
+runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '¡No olvides tu regalito! 💗' presente", () => {
   assert(
     !htmlContent.includes("Dress Code"),
     "Se encontró todavía la etiqueta 'Dress Code' en el HTML"
@@ -176,16 +202,16 @@ runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '*OBLIGATORI
     "No se encontró 'ACTITUD' en el HTML"
   );
   assert(
-    htmlContent.includes("*OBLIGATORIO*"),
-    "No se encontró '*OBLIGATORIO*' en el HTML"
+    htmlContent.includes("¡No olvides"),
+    "No se encontró '¡No olvides' en el HTML"
+  );
+  assert(
+    htmlContent.includes("tu regalito! 💗"),
+    "No se encontró 'tu regalito! 💗' en el HTML"
   );
   assert(
     htmlContent.includes("color: var(--gold-dark);"),
     "No se encontró color: var(--gold-dark) aplicado a .title"
-  );
-  assert(
-    htmlContent.includes("color: #DC2626 !important;"),
-    "No se encontró color: #DC2626 aplicado a gift-mandatory"
   );
 });
 
