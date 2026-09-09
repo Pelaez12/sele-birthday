@@ -161,8 +161,8 @@ runTest("5. Botón 'CONFIRMAR ASISTENCIA' y URL de WhatsApp con número y texto 
   );
 });
 
-// 5.1 Eliminación de Dress Code, TRAER REGALO con color Actitud y *OBLIGATORIO* en rojo
-runTest("5.1 Dress Code eliminado, 'TRAER REGALO' en dorado y '*OBLIGATORIO*' en rojo presente", () => {
+// 5.1 Eliminación de Dress Code, TRAER REGALO y ACTITUD simétricos en dorado y *OBLIGATORIO* en rojo
+runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '*OBLIGATORIO*' en rojo presente", () => {
   assert(
     !htmlContent.includes("Dress Code"),
     "Se encontró todavía la etiqueta 'Dress Code' en el HTML"
@@ -172,12 +172,16 @@ runTest("5.1 Dress Code eliminado, 'TRAER REGALO' en dorado y '*OBLIGATORIO*' en
     "No se encontró 'TRAER REGALO' en el HTML"
   );
   assert(
+    htmlContent.includes("ACTITUD"),
+    "No se encontró 'ACTITUD' en el HTML"
+  );
+  assert(
     htmlContent.includes("*OBLIGATORIO*"),
     "No se encontró '*OBLIGATORIO*' en el HTML"
   );
   assert(
-    htmlContent.includes("color: var(--gold-dark) !important;"),
-    "No se encontró color: var(--gold-dark) aplicado a gift-desc"
+    htmlContent.includes("color: var(--gold-dark);"),
+    "No se encontró color: var(--gold-dark) aplicado a .title"
   );
   assert(
     htmlContent.includes("color: #DC2626 !important;"),

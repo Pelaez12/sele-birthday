@@ -673,25 +673,21 @@
     .detail-box {
       background: var(--card-white);
       border-radius: 18px;
-      padding: 16px 14px;
-      border: 1px solid rgba(250, 93, 131, 0.12);
+      padding: 16px 12px;
+      border: 1px solid rgba(212, 163, 89, 0.22);
       box-shadow: var(--shadow-subtle);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-    }
-
-    .detail-box.detail-box-gift {
-      background: var(--card-white);
-      border: 1px solid rgba(212, 163, 89, 0.25);
-      box-shadow: var(--shadow-subtle);
+      justify-content: flex-start;
+      min-height: 136px;
     }
 
     .detail-box .icon {
-      font-size: 1.6rem;
-      margin-bottom: 6px;
+      height: 32px;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -699,12 +695,12 @@
     }
 
     .yape-icon-img {
-      width: 27px;
-      height: 27px;
+      width: 26px;
+      height: 26px;
       border-radius: 7px;
       object-fit: cover;
       vertical-align: middle;
-      box-shadow: 0 2px 8px rgba(116, 38, 142, 0.28);
+      box-shadow: 0 2px 6px rgba(116, 38, 142, 0.25);
       display: inline-block;
     }
 
@@ -714,31 +710,34 @@
       font-weight: 800;
       letter-spacing: 0.8px;
       color: var(--gold-dark);
-      margin-bottom: 4px;
+      margin: 0 0 6px 0;
+      min-height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
     }
 
     .detail-box .desc {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--text-dark);
       line-height: 1.25;
+      margin: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    .detail-box .gift-desc {
-      color: var(--gold-dark) !important;
-      font-weight: 800 !important;
-      font-size: 0.90rem !important;
-      line-height: 1.25 !important;
-      letter-spacing: 0.5px;
-    }
-
-    .detail-box .gift-desc .gift-mandatory {
+    .detail-box .gift-mandatory {
       color: #DC2626 !important;
-      font-size: 0.42rem !important;
+      font-size: 0.44rem !important;
       font-weight: 800 !important;
-      display: block;
-      margin-top: 2px;
       letter-spacing: 0.6px;
+      display: inline-block;
+      margin-top: 2px;
       opacity: 0.95;
     }
 
@@ -914,17 +913,26 @@
 
     <!-- Tarjetas de Detalles Adicionales -->
     <div class="details-grid">
-      <div class="detail-box detail-box-gift">
+      <div class="detail-box">
         <span class="icon">
           <span>🎁</span>
           <img src="assets/yape-icon.png" alt="Yape" class="yape-icon-img" />
         </span>
-        <span class="desc gift-desc">TRAER REGALO <span class="gift-mandatory">*OBLIGATORIO*</span></span>
+        <span class="title">TRAER REGALO</span>
+        <span class="desc">
+          <span class="gift-mandatory">*OBLIGATORIO*</span>
+        </span>
       </div>
       <div class="detail-box">
-        <span class="icon">🍸🪩</span>
-        <span class="title">Actitud</span>
-        <span class="desc">Ganas de bailar, reír y brindar</span>
+        <span class="icon">
+          <span>🍸</span>
+          <span>🪩</span>
+        </span>
+        <span class="title">ACTITUD</span>
+        <span class="desc">
+          <span>Ganas de bailar,</span>
+          <span>reír y brindar</span>
+        </span>
       </div>
     </div>
 
