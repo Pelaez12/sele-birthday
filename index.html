@@ -1108,8 +1108,8 @@
     <span class="music-fab-label" id="musicLabel">Música de fiesta 🎶</span>
   </button>
 
-  <!-- Audio de la canción de cumpleaños -->
-  <audio id="birthdayAudio" src="assets/birthday-song.mp3" preload="auto" loop></audio>
+  <!-- Audio de la canción de cumpleaños con autoplay inmediato -->
+  <audio id="birthdayAudio" src="assets/birthday-song.mp3" preload="auto" loop autoplay playsinline webkit-playsinline></audio>
 
   <!-- Canvas independiente para la lluvia de confeti -->
   <canvas id="confettiCanvas"></canvas>
@@ -1541,8 +1541,9 @@
           if (playPromise !== undefined) {
             playPromise.then(function () {
               setMusicPlayingState(true);
+              removeGestureListeners();
             }).catch(function () {
-              // El navegador bloqueó el autoplay sin interacción previa
+              // El navegador bloqueó el autoplay sin interacción previa del usuario
               setMusicPlayingState(false);
             });
           }
@@ -1578,6 +1579,7 @@
         // Eventos nativos de audio para asegurar sincronización 100% precisa
         audio.addEventListener("play", function () {
           setMusicPlayingState(true);
+          removeGestureListeners();
         });
         audio.addEventListener("pause", function () {
           setMusicPlayingState(false);
@@ -1586,17 +1588,34 @@
           setMusicPlayingState(false);
         });
 
-        // Intentar iniciar la música en la primera interacción (tap / click en cualquier lugar)
-        function initMusicOnFirstGesture() {
+        // 1. INTENTO DE AUTOPLAY INMEDIATO AL INICIAR LA PÁGINA (sin necesidad de presionar)
+        playMusic();
+        document.addEventListener("DOMContentLoaded", playMusic);
+        window.addEventListener("load", playMusic);
+        window.addEventListener("pageshow", playMusic);
+
+        // 2. RESPALDO AUTOMÁTICO ANTE CUALQUIER MICRO-ACCIÓN
+        // Si las políticas de seguridad del navegador restringen el audio sin interacción previa,
+        // la música se inicia de forma 100% transparente ante cualquier deslizamiento o toque.
+        const gestureEvents = ["click", "touchstart", "touchend", "pointerdown", "scroll", "wheel", "keydown"];
+
+        function onAnyUserGesture() {
           if (audio.paused) {
             playMusic();
           }
-          window.removeEventListener("click", initMusicOnFirstGesture);
-          window.removeEventListener("touchstart", initMusicOnFirstGesture);
         }
 
-        window.addEventListener("click", initMusicOnFirstGesture, { once: true });
-        window.addEventListener("touchstart", initMusicOnFirstGesture, { once: true });
+        function removeGestureListeners() {
+          gestureEvents.forEach(function (ev) {
+            window.removeEventListener(ev, onAnyUserGesture, { capture: true });
+            document.removeEventListener(ev, onAnyUserGesture, { capture: true });
+          });
+        }
+
+        gestureEvents.forEach(function (ev) {
+          window.addEventListener(ev, onAnyUserGesture, { capture: true, passive: true });
+          document.addEventListener(ev, onAnyUserGesture, { capture: true, passive: true });
+        });
 
         // Mostrar un breve hint visual durante 3.2 segundos
         setTimeout(function () {
