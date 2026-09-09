@@ -24,7 +24,7 @@ const DISCO_BALL_FILE = path.join(ROOT_DIR, 'assets', 'disco-ball.svg');
 
 const EXPECTED_MAPS_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.740219505921!2d-77.06177992400096!3d-12.0613866881766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c979204be905%3A0x1f4945a1b3f4c333!2sKraken%20Bar%20Lima!5e0!3m2!1ses-419!2spe!4v1788839978057!5m2!1ses-419!2spe";
 const EXPECTED_PHONE = "51912652283";
-const EXPECTED_MSG_ENCODED = "CONFIRMO%20MI%20ASISTENCIA%20%E2%9C%85%20";
+const EXPECTED_MSG_ENCODED = "CONFIRMO%20MI%20ASISTENCIA%20%E2%9C%93";
 const EXPECTED_TARGET_DATE = "2026-09-19T21:00:00-05:00";
 
 let testsPassed = 0;
@@ -137,10 +137,30 @@ runTest("5. Botón 'CONFIRMAR ASISTENCIA' y URL de WhatsApp con número y texto 
   );
 
   // Verificar estructura completa de la URL de WhatsApp
-  const fullWhatsappRegex = /https:\/\/wa\.me\/51912652283\?text=CONFIRMO%20MI%20ASISTENCIA%20%E2%9C%85%20/;
+  const fullWhatsappRegex = /https:\/\/wa\.me\/51912652283\?text=CONFIRMO%20MI%20ASISTENCIA%20%E2%9C%93/;
   assert(
     fullWhatsappRegex.test(htmlContent),
     "No se encontró la URL completa y correcta de WhatsApp wa.me"
+  );
+});
+
+// 5.1 Eliminación de Dress Code y presencia de 'TRAER REGALO *OBLIGATORIO*' en rojo
+runTest("5.1 Dress Code eliminado y 'TRAER REGALO *OBLIGATORIO*' en rojo presente", () => {
+  assert(
+    !htmlContent.includes("Dress Code"),
+    "Se encontró todavía la etiqueta 'Dress Code' en el HTML"
+  );
+  assert(
+    htmlContent.includes("TRAER REGALO"),
+    "No se encontró 'TRAER REGALO' en el HTML"
+  );
+  assert(
+    htmlContent.includes("*OBLIGATORIO*"),
+    "No se encontró '*OBLIGATORIO*' en el HTML"
+  );
+  assert(
+    htmlContent.includes("#DC2626"),
+    "No se encontró el color rojo #DC2626 aplicado al texto del regalo obligatorio"
   );
 });
 
