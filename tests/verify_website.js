@@ -187,11 +187,15 @@ runTest("5. Botón 'CONFIRMAR ASISTENCIA' y URL de WhatsApp con número y texto 
   );
 });
 
-// 5.1 Eliminación de Dress Code, TRAER REGALO y ACTITUD simétricos con '¡No olvides tu regalito! 💗'
-runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '¡No olvides tu regalito! 💗' presente", () => {
+// 5.1 Eliminación de Dress Code, sin *OBLIGATORIO*, TRAER REGALO y ACTITUD simétricos con '¡No olvides tu regalito! 💗'
+runTest("5.1 Eliminación de Dress Code y *OBLIGATORIO*, tarjetas simétricas con '¡No olvides tu regalito! 💗'", () => {
   assert(
     !htmlContent.includes("Dress Code"),
     "Se encontró todavía la etiqueta 'Dress Code' en el HTML"
+  );
+  assert(
+    !htmlContent.includes("*OBLIGATORIO*"),
+    "Se encontró todavía '*OBLIGATORIO*' en el HTML"
   );
   assert(
     htmlContent.includes("TRAER REGALO"),
@@ -212,6 +216,27 @@ runTest("5.1 Dress Code eliminado, tarjetas simétricas en dorado y '¡No olvide
   assert(
     htmlContent.includes("color: var(--gold-dark);"),
     "No se encontró color: var(--gold-dark) aplicado a .title"
+  );
+});
+
+// 5.2 Bola disco interactiva: gira y brilla al sonar la música
+runTest("5.2 Bola disco interactiva: gira y brilla al reproducir la música", () => {
+  assert(
+    htmlContent.includes("spinOrb"),
+    "No se encontró la animación 'spinOrb' para el giro de la bola disco"
+  );
+  assert(
+    htmlContent.includes("disco-light-rays"),
+    "No se encontró la clase 'disco-light-rays' para los rayos de luz de discoteca"
+  );
+  assert(
+    htmlContent.includes("discoPulseGlow"),
+    "No se encontró la animación 'discoPulseGlow' para el resplandor de la bola disco"
+  );
+  assert(
+    htmlContent.includes('discoFixture.classList.add("playing")') ||
+    htmlContent.includes("discoFixture.classList.add('playing')"),
+    "No se encontró la activación de .playing en discoFixture al reproducir música"
   );
 });
 

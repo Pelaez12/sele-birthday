@@ -1,27 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
   <defs>
     <!-- Background shadow glow for disco ball -->
-    <radialGradient id="discoAmbientGlow" cx="50%" cy="57%" r="50%">
-      <stop offset="60%" stop-color="#d4af37" stop-opacity="0.12" />
-      <stop offset="90%" stop-color="#cbd5e1" stop-opacity="0.05" />
+    <radialGradient id="discoAmbientGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#d4af37" stop-opacity="0.16" />
+      <stop offset="90%" stop-color="#cbd5e1" stop-opacity="0.06" />
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
     </radialGradient>
-
-    <!-- Hanging cord metallic gradient -->
-    <linearGradient id="cordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#94a3b8" />
-      <stop offset="50%" stop-color="#f8fafc" />
-      <stop offset="75%" stop-color="#d4af37" />
-      <stop offset="100%" stop-color="#64748b" />
-    </linearGradient>
-
-    <!-- Hanger cap and ring metallic gradient -->
-    <linearGradient id="metalCapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f8fafc" />
-      <stop offset="35%" stop-color="#cbd5e1" />
-      <stop offset="70%" stop-color="#eab308" />
-      <stop offset="100%" stop-color="#475569" />
-    </linearGradient>
 
     <!-- Base sphere inner shadow -->
     <radialGradient id="sphereBaseGrad" cx="38%" cy="35%" r="65%">
@@ -53,20 +37,13 @@
     </clipPath>
   </defs>
 
-  <!-- Ambient background glow behind sphere -->
-  <circle cx="100" cy="114" r="74" fill="url(#discoAmbientGlow)" />
+  <!-- Centered Spinning Disco Orb (centered at 100, 100) -->
+  <g id="discoOrbCenter" transform="translate(0, -14)">
+    <!-- Ambient background glow behind sphere -->
+    <circle cx="100" cy="114" r="74" fill="url(#discoAmbientGlow)" />
 
-  <!-- Hanging Cord -->
-  <line x1="100" y1="0" x2="100" y2="44" stroke="url(#cordGrad)" stroke-width="2" stroke-linecap="round" />
-
-  <!-- Hanger Eyelet / Ring -->
-  <circle cx="100" cy="45" r="5" fill="none" stroke="url(#metalCapGrad)" stroke-width="2.2" />
-  
-  <!-- Hanger Cap Connector -->
-  <path d="M 93 49 L 107 49 L 105 54 L 95 54 Z" fill="url(#metalCapGrad)" stroke="#334155" stroke-width="0.8" />
-
-  <!-- The Disco Ball Body -->
-  <g id="discoBallGroup">
+    <!-- The Disco Ball Body -->
+    <g id="discoBallGroup">
     <!-- Base dark sphere (provides joint grout color) -->
     <circle cx="100" cy="114" r="62" fill="url(#sphereBaseGrad)" />
 
@@ -250,5 +227,6 @@
   <g transform="translate(98, 64)" filter="url(#sparkleGlow)">
     <path d="M 0 -5 Q 0 0 5 0 Q 0 0 0 5 Q 0 0 -5 0 Q 0 0 0 -5 Z" fill="#ffffff" opacity="0.85" />
     <circle cx="0" cy="0" r="0.8" fill="#ffffff" />
+  </g>
   </g>
 </svg>

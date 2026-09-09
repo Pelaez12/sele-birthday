@@ -164,27 +164,32 @@
     }
 
     /* ==========================================================================
-       BOLA DISCO 2D ANIMADA COLGADA EN LA PARTE SUPERIOR
+       BOLA DISCO 2D ANIMADA COLGADA EN LA PARTE SUPERIOR (CON MODO MÚSICA ACTIVA)
        ========================================================================== */
     .disco-fixture {
       position: relative;
-      width: 130px;
-      height: 140px;
-      margin-top: -10px;
+      width: 140px;
+      height: 155px;
+      margin-top: -12px;
       margin-bottom: 8px;
       z-index: 10;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       transform-origin: top center;
       animation: swing 4.2s ease-in-out infinite alternate;
-      filter: drop-shadow(0 10px 18px rgba(250, 93, 131, 0.25));
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: filter 0.3s ease;
     }
 
-    .disco-fixture img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+    .disco-fixture:hover {
+      filter: drop-shadow(0 12px 24px rgba(250, 93, 131, 0.4));
+    }
+
+    /* Rítmico y bailable cuando la música suena */
+    .disco-fixture.playing {
+      animation: swingGroove 2.5s ease-in-out infinite alternate;
     }
 
     @keyframes swing {
@@ -196,30 +201,231 @@
       }
     }
 
-    /* Destello especial cerca de la bola disco */
-    .disco-glow-aura {
-      position: absolute;
-      top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, rgba(255, 158, 187, 0.35) 0%, rgba(212, 163, 89, 0.2) 45%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(12px);
-      pointer-events: none;
-      animation: pulseGlow 2.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseGlow {
+    @keyframes swingGroove {
       0% {
-        transform: translateX(-50%) scale(0.85);
-        opacity: 0.5;
+        transform: rotate(-6deg) translateY(0);
+      }
+      50% {
+        transform: rotate(0deg) translateY(2.5px);
       }
       100% {
-        transform: translateX(-50%) scale(1.2);
-        opacity: 0.95;
+        transform: rotate(6deg) translateY(0);
       }
+    }
+
+    /* Cordón colgante estático unido al techo */
+    .disco-cord-hanger {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .disco-cord-line {
+      width: 2px;
+      height: 28px;
+      background: linear-gradient(180deg, #94a3b8 0%, #cbd5e1 50%, #d4af37 80%, #64748b 100%);
+      box-shadow: 0 0 4px rgba(212, 175, 55, 0.4);
+    }
+
+    .disco-cord-ring {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #eab308;
+      background: radial-gradient(circle, #f8fafc 30%, #cbd5e1 100%);
+      margin-top: -2px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .disco-cord-cap {
+      width: 18px;
+      height: 6px;
+      background: linear-gradient(90deg, #475569, #eab308, #f8fafc, #eab308, #334155);
+      border-radius: 3px 3px 1px 1px;
+      margin-top: -1px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Contenedor del orbe disco giratorio y luminoso */
+    .disco-orb-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin-top: -2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .disco-ball-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transform-origin: center center;
+      transition: filter 0.4s ease;
+      filter: drop-shadow(0 8px 18px rgba(250, 93, 131, 0.25));
+    }
+
+    /* CUANDO LA MÚSICA SUENA: ¡El disco orbe empieza a girar y brilla intensamente! */
+    .disco-fixture.playing .disco-ball-img {
+      animation: spinOrb 3.6s linear infinite;
+      filter: drop-shadow(0 0 16px rgba(250, 93, 131, 0.9)) drop-shadow(0 0 32px rgba(212, 163, 89, 0.8)) brightness(1.15) contrast(1.05);
+    }
+
+    @keyframes spinOrb {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Rayos de luz de discoteca giratorios radiantes */
+    .disco-light-rays {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      margin-top: -160px;
+      margin-left: -160px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 215, 0, 0.28) 12deg,
+        transparent 24deg,
+        rgba(250, 93, 131, 0.32) 36deg,
+        transparent 48deg,
+        rgba(255, 255, 255, 0.4) 60deg,
+        transparent 72deg,
+        rgba(255, 215, 0, 0.28) 84deg,
+        transparent 96deg,
+        rgba(250, 93, 131, 0.32) 108deg,
+        transparent 120deg,
+        rgba(255, 255, 255, 0.4) 132deg,
+        transparent 144deg,
+        rgba(255, 215, 0, 0.28) 156deg,
+        transparent 168deg,
+        rgba(250, 93, 131, 0.32) 180deg,
+        transparent 192deg,
+        rgba(255, 255, 255, 0.4) 204deg,
+        transparent 216deg,
+        rgba(255, 215, 0, 0.28) 228deg,
+        transparent 240deg,
+        rgba(250, 93, 131, 0.32) 252deg,
+        transparent 264deg,
+        rgba(255, 255, 255, 0.4) 276deg,
+        transparent 288deg,
+        rgba(255, 215, 0, 0.28) 300deg,
+        transparent 312deg,
+        rgba(250, 93, 131, 0.32) 324deg,
+        transparent 336deg,
+        rgba(255, 255, 255, 0.4) 348deg,
+        transparent 360deg
+      );
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      mask-image: radial-gradient(circle, black 25%, transparent 70%);
+      -webkit-mask-image: radial-gradient(circle, black 25%, transparent 70%);
+    }
+
+    .disco-fixture.playing .disco-light-rays {
+      opacity: 0.95;
+      animation: spinRays 7s linear infinite reverse;
+    }
+
+    @keyframes spinRays {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Aura luminosa pulsante detrás del orbe */
+    .disco-glow-aura {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(255, 158, 187, 0.45) 0%, rgba(212, 163, 89, 0.3) 45%, transparent 72%);
+      border-radius: 50%;
+      filter: blur(14px);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.5;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .disco-fixture.playing .disco-glow-aura {
+      opacity: 1;
+      animation: discoPulseGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes discoPulseGlow {
+      0% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.75;
+        filter: blur(12px);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 1;
+        filter: blur(20px);
+      }
+    }
+
+    /* Estrellas y destellos orbitantes */
+    .disco-sparkle-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0.4;
+      transition: opacity 0.4s ease;
+    }
+
+    .disco-fixture.playing .disco-sparkle-stars {
+      opacity: 1;
+    }
+
+    .d-star {
+      position: absolute;
+      display: inline-block;
+      font-size: 1rem;
+      line-height: 1;
+      color: #D4AF37;
+      text-shadow: 0 0 8px rgba(254, 240, 138, 0.9), 0 0 12px rgba(250, 93, 131, 0.7);
+    }
+
+    .d-star.ds-1 { top: -6px; left: 14px; font-size: 1.15rem; color: #FFFFFF; }
+    .d-star.ds-2 { top: 12px; right: -8px; font-size: 1rem; color: #FA5D83; }
+    .d-star.ds-3 { bottom: 4px; left: -10px; font-size: 0.95rem; color: #EAB308; }
+    .d-star.ds-4 { bottom: -8px; right: 18px; font-size: 1.1rem; color: #FFFFFF; }
+    .d-star.ds-5 { top: 48%; right: -14px; font-size: 0.85rem; color: #FF9EBB; }
+
+    .disco-fixture.playing .d-star.ds-1 { animation: starTwinkle 1.1s ease-in-out infinite alternate; }
+    .disco-fixture.playing .d-star.ds-2 { animation: starTwinkle 1.4s ease-in-out infinite alternate 0.2s; }
+    .disco-fixture.playing .d-star.ds-3 { animation: starTwinkle 0.9s ease-in-out infinite alternate 0.4s; }
+    .disco-fixture.playing .d-star.ds-4 { animation: starTwinkle 1.3s ease-in-out infinite alternate 0.1s; }
+    .disco-fixture.playing .d-star.ds-5 { animation: starTwinkle 1.0s ease-in-out infinite alternate 0.3s; }
+
+    @keyframes starTwinkle {
+      0% { transform: scale(0.7) rotate(0deg); opacity: 0.4; }
+      100% { transform: scale(1.35) rotate(45deg); opacity: 1; }
     }
 
     /* ==========================================================================
@@ -731,16 +937,6 @@
       justify-content: center;
     }
 
-    .detail-box .gift-mandatory {
-      color: #DC2626 !important;
-      font-size: 0.44rem !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.6px;
-      display: inline-block;
-      margin-top: 2px;
-      opacity: 0.95;
-    }
-
     /* ==========================================================================
        PIE DE PÁGINA
        ========================================================================== */
@@ -932,10 +1128,27 @@
 
   <div class="page-wrapper">
 
-    <!-- Bola disco 2D animada colgada de cordón superior -->
-    <div class="disco-fixture" title="¡Noche de fiesta y brillo!">
-      <div class="disco-glow-aura"></div>
-      <img src="assets/disco-ball.svg" alt="Bola de discoteca brillante" />
+    <!-- Bola disco 2D animada colgada de cordón superior (Orbe giratorio y luminoso) -->
+    <div class="disco-fixture" id="discoFixture" role="button" tabindex="0" aria-label="Reproducir o pausar música de fiesta" title="Toca la bola disco para escuchar la música 🪩🎶">
+      <!-- Cordón colgante estático unido al techo -->
+      <div class="disco-cord-hanger" aria-hidden="true">
+        <div class="disco-cord-line"></div>
+        <div class="disco-cord-ring"></div>
+        <div class="disco-cord-cap"></div>
+      </div>
+      <!-- Orbe disco giratorio y luminoso -->
+      <div class="disco-orb-wrapper" id="discoOrbWrapper">
+        <div class="disco-glow-aura" id="discoGlow"></div>
+        <div class="disco-light-rays" id="discoRays"></div>
+        <img src="assets/disco-ball.svg" alt="Bola de discoteca brillante" class="disco-ball-img" id="discoBallImg" />
+        <div class="disco-sparkle-stars" id="discoSparkles" aria-hidden="true">
+          <span class="d-star ds-1">✦</span>
+          <span class="d-star ds-2">✨</span>
+          <span class="d-star ds-3">✧</span>
+          <span class="d-star ds-4">✦</span>
+          <span class="d-star ds-5">✨</span>
+        </div>
+      </div>
     </div>
 
     <!-- Header / Título Coquette -->
@@ -1304,6 +1517,7 @@
       const musicToggle = document.getElementById("musicToggle");
       const musicIcon = document.getElementById("musicIcon");
       const musicLabel = document.getElementById("musicLabel");
+      const discoFixture = document.getElementById("discoFixture");
 
       if (audio && musicToggle) {
         audio.volume = 0.75;
@@ -1311,10 +1525,12 @@
         function setMusicPlayingState(isPlaying) {
           if (isPlaying) {
             musicToggle.classList.add("playing");
+            if (discoFixture) discoFixture.classList.add("playing");
             if (musicIcon) musicIcon.textContent = "🎶";
             if (musicLabel) musicLabel.textContent = "Pausar música ⏸";
           } else {
             musicToggle.classList.remove("playing");
+            if (discoFixture) discoFixture.classList.remove("playing");
             if (musicIcon) musicIcon.textContent = "🎵";
             if (musicLabel) musicLabel.textContent = "Reproducir música ▶";
           }
@@ -1337,13 +1553,37 @@
           setMusicPlayingState(false);
         }
 
-        musicToggle.addEventListener("click", function (e) {
-          e.stopPropagation();
+        function toggleMusic(e) {
+          if (e) e.stopPropagation();
           if (audio.paused) {
             playMusic();
           } else {
             pauseMusic();
           }
+        }
+
+        musicToggle.addEventListener("click", toggleMusic);
+
+        // Control interactivo también desde la propia bola disco (tocar para reproducir/pausar)
+        if (discoFixture) {
+          discoFixture.addEventListener("click", toggleMusic);
+          discoFixture.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleMusic(e);
+            }
+          });
+        }
+
+        // Eventos nativos de audio para asegurar sincronización 100% precisa
+        audio.addEventListener("play", function () {
+          setMusicPlayingState(true);
+        });
+        audio.addEventListener("pause", function () {
+          setMusicPlayingState(false);
+        });
+        audio.addEventListener("ended", function () {
+          setMusicPlayingState(false);
         });
 
         // Intentar iniciar la música en la primera interacción (tap / click en cualquier lugar)
